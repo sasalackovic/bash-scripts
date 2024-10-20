@@ -26,6 +26,7 @@ if [ "$old_ip" != "$new_ip" ]; then
         # Check if the Docker container 'shardeum-dashboard' is running
         if [ $(docker ps -q -f name=shardeum-dashboard) ]; then
                 docker exec -it shardeum-dashboard operator-cli stop
+                /root/.shardeum/update.sh
                 docker exec -it shardeum-dashboard operator-cli start
                 echo "$(timestamp) - Shardeum node restarted."
         else
