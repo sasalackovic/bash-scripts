@@ -1,2 +1,2 @@
 # bash-scripts
-Place for keeping all of my bash scripts in one place.
+Place to keep all of my bash scripts in one place.
