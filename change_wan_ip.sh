@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# Bash script that detects if a public IP address of a home server changed. If it has changed, then update the file with a new IP address. After that it restarts the node run in a docker container called 'shardeum-dashboard'
-
 # Function to get the current date and time in the format "dd.mm.yyyy hh:mm"
 timestamp() {
      date +"%d.%m.%Y %H:%M:%S"
@@ -26,6 +24,7 @@ if [ "$old_ip" != "$new_ip" ]; then
         # Check if the Docker container 'shardeum-dashboard' is running
         if [ $(docker ps -q -f name=shardeum-dashboard) ]; then
                 docker exec -it shardeum-dashboard operator-cli stop
+                /root/.shardeum/update.sh
                 docker exec -it shardeum-dashboard operator-cli start
                 echo "$(timestamp) - Shardeum node restarted."
         else
@@ -37,4 +36,4 @@ if [ "$old_ip" != "$new_ip" ]; then
         exit 1
 fi
 
-printf "$(timestamp) - IP address is the same. Not changing!\n\n"
+printf "$(timestamp) - IP address is the same ($old_ip = $new_ip). Not changing!\n\n"
