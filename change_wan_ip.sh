@@ -38,4 +38,4 @@ if [ "$old_ip" != "$new_ip" ]; then
         exit 1
 fi
 
-printf "$(timestamp) - IP address is the same. Not changing!\n\n"
+printf "$(timestamp) - IP address is the same ($old_ip = $new_ip). Not changing!\n\n"
